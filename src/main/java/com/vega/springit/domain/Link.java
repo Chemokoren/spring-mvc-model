@@ -17,7 +17,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @RequiredArgsConstructor
@@ -26,18 +25,6 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 public class Link extends Auditable {
-
-//    public Link(String k, String v) {
-//        super();
-//    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Id
     @GeneratedValue
@@ -48,13 +35,17 @@ public class Link extends Auditable {
     private String title;
 
     @NonNull
-    @NotEmpty(message = "Please enter a title.")
-    @URL(message = "Please enter a valid URL.")
+    @NotEmpty(message = "Please enter a url.")
+    @URL(message = "Please enter a valid url.")
     private String url;
 
-    //    comments
     @OneToMany(mappedBy = "link")
     private List<Comments> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "link")
+    private List<Vote> votes = new ArrayList<>();
+
+    private int voteCount = 0;
 
     public void addComment(Comments comment) {
         comments.add(comment);

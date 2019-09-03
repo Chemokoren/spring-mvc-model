@@ -65,6 +65,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
         Role userRole = new Role("ROLE_USER");
         roleRepository.save(userRole);
+
         Role adminRole = new Role("ROLE_ADMIN");
         roleRepository.save(adminRole);
 
