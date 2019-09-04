@@ -1,5 +1,6 @@
 package com.vega.springit.bootstrap;
 
+import com.vega.springit.domain.Comments;
 import com.vega.springit.domain.Link;
 import com.vega.springit.domain.Role;
 import com.vega.springit.domain.User;
@@ -51,8 +52,18 @@ public class DatabaseLoader implements CommandLineRunner {
         links.put("File download example using Spring REST Controller", "https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
 
         links.forEach((k, v) -> {
-            linkRepository.save(new Link(k, v));
+            Link link = new Link(k, v);
+            linkRepository.save(link);
+
             // we will do something with comments later
+            Comments spring = new Comments("Thank you for this link related to Spring Boot. I love it, great post!", link);
+            Comments security = new Comments("I love that you're talking about Spring Security", link);
+            Comments pwa = new Comments("What is this Progressive Web App thing all about? PWAs sound really cool.", link);
+            Comments comments[] = {spring, security, pwa};
+            for (Comments comment : comments) {
+                commentRepository.save(comment);
+                link.addComment(comment);
+            }
         });
 
         long linkCount = linkRepository.count();
