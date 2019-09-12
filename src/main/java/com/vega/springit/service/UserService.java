@@ -1,5 +1,4 @@
 package com.vega.springit.service;
-
 import com.vega.springit.domain.User;
 import com.vega.springit.repository.UserRepository;
 import org.slf4j.Logger;
@@ -58,7 +57,7 @@ public class UserService {
 
     @Transactional
     public void saveUsers(User... users) {
-        for (User user : users) {
+        for(User user : users) {
             logger.info("Saving User: " + user.getEmail());
             userRepository.save(user);
         }
@@ -73,6 +72,6 @@ public class UserService {
     }
 
     public Optional<User> findByEmailAndActivationCode(String email, String activationCode) {
-        return userRepository.findByEmailAndActivationCode(email, activationCode);
+        return userRepository.findByEmailAndActivationCode(email,activationCode);
     }
 }

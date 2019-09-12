@@ -36,7 +36,7 @@ public class MailService {
             message.setTo(to);
             message.setFrom("noreply@springit.com");
             message.setSubject(subject);
-            message.setText(content, isHtml);
+            message.setText(content,isHtml);
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
             log.warn("Email could not be sent to user '{}': {}", to, e.getMessage());
@@ -48,9 +48,9 @@ public class MailService {
         Locale locale = Locale.ENGLISH;
         Context context = new Context(locale);
         context.setVariable("user", user);
-        context.setVariable("baseURL", BASE_URL);
-        String content = templateEngine.process(templateName, context);
-        sendEmail(user.getEmail(), subject, content, false, true);
+        context.setVariable("baseURL",BASE_URL);
+        String content = templateEngine.process(templateName,context);
+        sendEmail(user.getEmail(),subject,content,false,true);
     }
 
     @Async
